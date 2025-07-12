@@ -1,0 +1,44 @@
+@use '../core/variables' as *;
+
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+  background-color: $dark-color;
+  color: white;
+
+  &__content {
+    flex: 1; /* Esto hace que ocupe el espacio disponible entre header y footer */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &__button {
+    background-color: $primary-color;
+    color: $dark-color;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+
+    &:hover {
+      background-color: #155724; 
+      color: $light-bg;
+    }
+  }
+}
