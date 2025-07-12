@@ -1,0 +1,40 @@
+@use '../core/variables' as *;
+
+.create-itinerary {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  &__wrapper {
+    display: flex;
+    flex: 1;
+    margin-top: 60px;
+  }
+
+  &__panel {
+    width: 300px;
+    background-color: $light-bg;
+    color: $dark-color;
+    padding: 2rem;
+    border-right: 1px solid #ccc;
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  &__map {
+    flex: 1;
+    background-color: #e9ecef;
+    min-height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $dark-color;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+}
