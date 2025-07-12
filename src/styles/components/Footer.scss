@@ -1,0 +1,10 @@
+@use '../core/variables' as *;
+
+.footer {
+    &__container {
+      background-color: $dark-color;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+    }
+  }
