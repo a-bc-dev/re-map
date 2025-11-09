@@ -1,0 +1,242 @@
+@use '../core/variables' as *;
+
+.search-panel {
+  width: 350px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+
+  &__header {
+    padding: 1.5rem;
+    background-color: $primary-color;
+    color: white;
+    
+    h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+  }
+
+  &__trip-name {
+    padding: 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: $dark-color;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+
+      &:focus {
+        outline: none;
+        border-color: $primary-color;
+      }
+    }
+  }
+
+  &__geocoder {
+    padding: 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: $dark-color;
+    }
+
+    // Geocoder container
+    .geocoder-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    // Mapbox Geocoder styles
+    :global {
+      .mapboxgl-ctrl-geocoder {
+        box-shadow: none;
+        max-width: 100%;
+        width: 100%;
+        border-radius: 8px;
+        border: 2px solid #e0e0e0;
+        
+        input {
+          padding: 0.75rem;
+          font-size: 0.95rem;
+          border: none;
+          
+          &:focus {
+            outline: none;
+          }
+        }
+
+        .mapboxgl-ctrl-geocoder--icon {
+          fill: $primary-color;
+        }
+
+        .mapboxgl-ctrl-geocoder--button {
+          background-color: transparent;
+          
+          &:hover {
+            background-color: rgba($primary-color, 0.1);
+          }
+        }
+
+        .suggestions {
+          border-radius: 0 0 8px 8px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+      }
+    }
+  }
+
+  &__markers {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+
+    h3 {
+      margin: 0 0 1rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.1rem;
+      color: $dark-color;
+    }
+  }
+
+  &__clear-all {
+    background: none;
+    border: none;
+    color: #dc3545;
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: underline;
+
+    &:hover {
+      color: #c82333;
+    }
+  }
+
+  &__empty {
+    text-align: center;
+    color: #999;
+    font-size: 0.9rem;
+    padding: 2rem 1rem;
+    line-height: 1.6;
+  }
+
+  &__markers-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  &__save-btn {
+    margin: 1.5rem;
+    padding: 1rem;
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover:not(:disabled) {
+      background-color: $secondary-color;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba($primary-color, 0.3);
+    }
+
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+}
+
+.marker-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background-color: $light-bg;
+  border-radius: 8px;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: #e8f5e9;
+    transform: translateX(4px);
+  }
+
+  &__number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background-color: $primary-color;
+    color: white;
+    border-radius: 50%;
+    font-weight: 600;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    margin: 0 0 0.25rem 0;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: $dark-color;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__coords {
+    margin: 0;
+    font-size: 0.75rem;
+    color: #666;
+    font-family: monospace;
+  }
+
+  &__delete {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    opacity: 0.6;
+    transition: all 0.2s;
+
+    &:hover {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+}
+
+  
