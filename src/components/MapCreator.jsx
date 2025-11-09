@@ -5,19 +5,19 @@ import '../styles/components/MapCreator.scss';
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
 if (!mapboxgl.accessToken) throw new Error('VITE_MAPBOX_TOKEN is required');
 
-export default function MapCreator({ markers = [], onMapClick }) {
-    const mapContainer = useRef(null);
-    const map = useRef(null);
-    const markerRefs = useRef([]);
+export default function MapCreator({ markers = [], onMapClick, onMarkerClick }) {
+  const mapContainer = useRef(null);
+  const map = useRef(null);
+  const markerRefs = useRef([]);
 
-    // Inicializa el mapa una sola vez
+  // Initialize map once
   useEffect(() => {
     if (map.current || !mapContainer.current) return;
 
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [-3.7038, 40.4168], // Madrid
+      center: [-3.7038, 40.4168],
       zoom: 6,
     });
 
@@ -32,25 +32,43 @@ export default function MapCreator({ markers = [], onMapClick }) {
       map.current?.remove();
       map.current = null;
     };
-  }, []);
+  }, [onMapClick]);
 
-  // Dibuja/actualiza marcadores
+  // Draw/update markers
   useEffect(() => {
     if (!map.current) return;
 
+    // Remove old markers
     markerRefs.current.forEach((m) => m.remove());
     markerRefs.current = [];
 
-    markers.forEach(({ lng, lat }) => {
-      const m = new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map.current);
-      markerRefs.current.push(m);
+    // Add new markers
+    markers.forEach((marker) => {
+      // Create default Mapbox marker (red pin style)
+      const markerElement = new mapboxgl.Marker({
+        color: '#28a745',
+        draggable: false,
+      })
+        .setLngLat([marker.lng, marker.lat])
+        .addTo(map.current);
+
+      // Get the marker DOM element and add click listener
+      const markerDom = markerElement.getElement();
+      markerDom.style.cursor = 'pointer';
+      
+      markerDom.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevents map click event
+        onMarkerClick?.(marker);
+      });
+
+      markerRefs.current.push(markerElement);
     });
 
     return () => {
       markerRefs.current.forEach((m) => m.remove());
       markerRefs.current = [];
     };
-  }, [markers]);
+  }, [markers, onMarkerClick]);
 
   return <div ref={mapContainer} className="map-container" />;
 }
