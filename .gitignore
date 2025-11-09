@@ -12,6 +12,16 @@ dist
 dist-ssr
 *.local
 
+# Environment variables
+.env
+
+# Backend uploads
+backend/uploads/photos/*
+backend/uploads/videos/*
+backend/uploads/audio/*
+backend/uploads/thumbnails/*
+!backend/uploads/**/.gitkeep
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
