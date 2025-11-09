@@ -1,12 +1,163 @@
-# React + Vite
+# re-map
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A geolocated photo and video organizer with interactive maps. Inspired by Apple iOS Photos, re-map allows you to organize your multimedia content by location, manually assign locations to photos taken without GPS, and add text or audio notes to each location.
 
-Currently, two official plugins are available:
+## Project Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```
+re-map/
+├── backend/          # Node.js + Express API with MySQL
+│   ├── config/       # Database and upload configuration
+│   ├── routes/       # API endpoints (maps, markers, multimedia)
+│   ├── uploads/      # File storage (photos, videos, audio)
+│   └── tests/        # API tests
+├── frontend/         # React + Vite application
+│   ├── src/
+│   │   ├── components/   # React components
+│   │   ├── pages/        # Page components
+│   │   ├── styles/       # SCSS styles
+│   │   └── services/     # API services
+│   └── public/
+└── README.md
+```
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 🗺️ Interactive maps powered by Mapbox GL
+- 📸 Organize photos and videos by location
+- 📍 Manual location assignment for media without GPS data
+- 📝 Add text notes to locations
+- 🎤 Record and attach audio notes
+- 🔍 Search locations with geocoding
+- 📤 Drag & drop file upload
+- 🎨 Clean, modern UI with SCSS styling
+
+## Tech Stack
+
+### Backend
+- **Node.js** + **Express** - REST API
+- **MySQL** - Database
+- **Multer** - File upload handling
+- **Jest** + **Supertest** - Testing
+
+### Frontend
+- **React 19** - UI library
+- **Vite** - Build tool and dev server
+- **Mapbox GL JS** - Interactive maps
+- **React Router** - Navigation
+- **SASS** - Styling
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js 18+
+- MySQL 8.0+
+- Mapbox API key
+
+### 1. Backend Setup
+
+```bash
+cd backend
+
+# Install dependencies
+npm install
+
+# Configure environment variables
+cp .env.example .env
+# Edit .env with your MySQL credentials
+
+# Create database
+mysql -u root -p < ../mapalbum_improved.sql
+
+# Start server
+npm start
+# Or for development with auto-reload:
+npm run dev
+```
+
+Backend will run at `http://localhost:3000`
+
+### 2. Frontend Setup
+
+```bash
+cd frontend
+
+# Install dependencies
+npm install
+
+# Configure environment variables
+# Create .env file with:
+# VITE_API_URL=http://localhost:3000
+# VITE_MAPBOX_TOKEN=your_mapbox_token
+
+# Start development server
+npm run dev
+```
+
+Frontend will run at `http://localhost:5173`
+
+## API Endpoints
+
+### Maps
+- `GET /maps` - Get all maps (paginated)
+- `POST /maps` - Create new map
+- `PUT /maps/:id` - Update map
+- `DELETE /maps/:id` - Delete map
+
+### Markers
+- `GET /markers` - Get all markers (paginated)
+- `POST /markers` - Create marker
+- `PUT /markers/:id` - Update marker
+- `DELETE /markers/:id` - Delete marker
+
+### Multimedia
+- `GET /multimedia/marker/:idMarker` - Get all media for a marker
+- `POST /multimedia/upload` - Upload files (photos/videos/audio)
+- `POST /multimedia/note` - Add text note
+- `DELETE /multimedia/:id` - Delete media
+
+## Development
+
+### Run Tests
+
+```bash
+cd backend
+npm test
+```
+
+### Build for Production
+
+```bash
+cd frontend
+npm run build
+```
+
+## Database Schema
+
+The application uses 4 main tables:
+- `users` - User accounts
+- `maps` - Photo albums/collections
+- `markers` - Geographic locations on maps
+- `multimedia` - Photos, videos, audio notes, and text notes
+
+See `mapalbum_improved.sql` for complete schema.
+
+## File Upload Support
+
+- **Images**: JPEG, PNG, GIF, WebP, HEIC
+- **Videos**: MP4, MPEG, QuickTime, AVI, WebM
+- **Audio**: MP3, WAV, WebM, OGG
+- **Max file size**: 100MB per file
+
+## License
+
+ISC
+
+## Author
+
+Bianca Dragan
+
+---
+
+Made with ❤️ for organizing life's memories

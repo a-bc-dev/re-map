@@ -1,16 +1,20 @@
 {
-  "name": "mapalbum-backend",
+  "name": "remap-backend",
   "version": "1.0.0",
-  "description": "Backend for ReMap",
+  "description": "Backend for re-map",
   "keywords": [
     "nodejs",
     "expressjs",
     "mysql",
     "API",
-    "mapalbum"
+    "remap",
+    "geolocation",
+    "photo-organizer"
   ],
   "repository": {
-  "type": "git",
+    "type": "git",
+    "url": "git+https://github.com/a-bc-dev/re-map"
+  },
   "license": "ISC",
   "author": "Bianca Dragan",
   "type": "commonjs",
